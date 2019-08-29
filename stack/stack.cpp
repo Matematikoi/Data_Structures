@@ -2,22 +2,24 @@
 
 using namespace std;
 
+
+template <class T>
 class Lifo{
     int top=-1;
     int size;
-    int* arr;
+    T* arr;
 
     public:
     Lifo(){
         size = 1;
-        arr = new int [size]; 
+        arr = new T [size];
     }
     bool isFull(){
         return top==size-1;
     }
-    void push (int number){
+    void push (T number){
         if ( isFull() ){
-            int* new_arr = new int[size*2];
+            T* new_arr = new T[size*2];
             size*=2;
             for (int i=0;i<size;++i){
                 new_arr[i]=arr[i];
@@ -29,9 +31,9 @@ class Lifo{
     bool isEmpty(){
         return top==-1;
     }
-    int last(){
+    T last(){
         if (isEmpty()){
-            return -1000000;
+            throw runtime_error("The stack is empty and there is no last element.");
         }
         return arr[top];
     }
@@ -45,14 +47,16 @@ class Lifo{
 
 
 int main (){
-    Lifo st;
-    st.push(1);
-    st.push(2);
-    st.push(3);
-    st.push(4);
-    
-    st.pop();
-    st.pop();
-    st.pop();
-    cout<<st.last()<<endl;
+    Lifo<char> st;
+    char arr[] = {'h','a','m','b','r','e'};
+    for (auto& i : arr){
+        st.push(i);
+    }
+    while (!st.isEmpty()){
+        cout<<st.last()<<endl;
+        st.pop();
+    }
+
+
+
 }
